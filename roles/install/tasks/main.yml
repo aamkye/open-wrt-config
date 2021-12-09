@@ -1,0 +1,12 @@
+- name: Preinstall
+  delegate_to: localhost
+  ansible.builtin.shell: |
+    {% for package in packages %}
+      scp ./package/{{ package.name }}_{{ arch }}.ipk root@{{ target | default('router') }}:/tmp
+      ssh root@{{ target | default('router') }} opkg install /tmp/{{ package.name }}_{{ arch }}.ipk
+    {% endfor %}
+    ssh root@{{ target | default('router') }} 'echo -e "Admin123\nAdmin123" | passwd'
+  register: preinstall_stdout
+
+- name: Print output
+  debug: msg={{ preinstall_stdout }}

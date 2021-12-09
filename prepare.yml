@@ -1,0 +1,6 @@
+- name: Prepare
+  hosts: "{{ target | default('router') }}"
+  vars_files:
+    - vars/packages.yml
+  roles:
+    - { role: prepare }

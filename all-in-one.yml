@@ -8,3 +8,7 @@
     - { role: wireless }
     - { role: network }
     - { role: dhcp }
+  tasks:
+    - name: reboot
+    - name: restart network-manager
+    - name: wait-for

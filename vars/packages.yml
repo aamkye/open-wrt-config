@@ -1,0 +1,32 @@
+link_base: "https://downloads.openwrt.org/releases"
+arch: "arm_cortex-a9_vfpv3-d16"
+
+packages:
+  - name: zlib_1.2.11-3
+    link: "{{link_base}}/packages-21.02/{{arch}}/base/zlib_1.2.11-3_{{arch}}.ipk"
+  - name: libpython3-3.9_3.9.7-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/libpython3-3.9_3.9.7-1_{{arch}}.ipk"
+  - name: python3-base_3.9.7-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-base_3.9.7-1_{{arch}}.ipk"
+  - name: coreutils_8.32-6
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/coreutils_8.32-6_{{arch}}.ipk"
+  - name: coreutils-base64_8.32-6
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/coreutils-base64_8.32-6_{{arch}}.ipk"
+  - name: libbz2-1.0_1.0.8-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/base/libbz2-1.0_1.0.8-1_{{arch}}.ipk"
+  - name: libffi_3.3-2
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/libffi_3.3-2_{{arch}}.ipk"
+  - name: librt_1.1.24-3
+    link: "{{link_base}}/21.02.0/targets/mvebu/cortexa9/packages/librt_1.1.24-3_{{arch}}.ipk"
+  - name: libuuid1_2.36.1-2
+    link: "{{link_base}}/packages-21.02/{{arch}}/base/libuuid1_2.36.1-2_{{arch}}.ipk"
+  - name: python3-email_3.9.7-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-email_3.9.7-1_{{arch}}.ipk"
+  - name: python3-light_3.9.7-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-light_3.9.7-1_{{arch}}.ipk"
+  - name: python3-distutils_3.9.7-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-distutils_3.9.7-1_{{arch}}.ipk"
+  - name: python3-logging_3.9.7-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-logging_3.9.7-1_{{arch}}.ipk"
+  - name: python3-multiprocessing_3.9.7-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-multiprocessing_3.9.7-1_{{arch}}.ipk"

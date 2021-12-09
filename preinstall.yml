@@ -1,4 +1,0 @@
-- name: Preinstall
-  hosts: "{{ target | default('router') }}"
-  roles:
-    - { role: preinstall }
