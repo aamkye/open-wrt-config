@@ -1,0 +1,7 @@
+- name: Commit dhcp changes
+  ansible.builtin.shell: |
+    uci commit dhcp
+
+- name: Restart dnsmasq
+  ansible.builtin.shell: |
+    /etc/init.d/dnsmasq restart

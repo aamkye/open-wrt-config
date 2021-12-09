@@ -1,0 +1,13 @@
+- name: Delete dhcp.lan
+  ansible.builtin.shell: |
+    uci delete dhcp.lan
+
+- name: Setup dhcp.lan
+  ansible.builtin.shell: |
+    uci add dhcp lan
+    uci set dhcp.lan="{{ dhcp.lan[0].__type }}"
+    uci set dhcp.lan.interface="{{ dhcp.lan[0].interface }}"
+    uci set dhcp.lan.start="{{ dhcp.lan[0].start }}"
+    uci set dhcp.lan.limit="{{ dhcp.lan[0].limit }}"
+    uci set dhcp.lan.leasetime="{{ dhcp.lan[0].leasetime }}"
+    uci set dhcp.lan.dhcpv4="{{ dhcp.lan[0].dhcpv4 }}"

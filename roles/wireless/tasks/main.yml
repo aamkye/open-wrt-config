@@ -1,0 +1,5 @@
+- include_tasks: clean.yml
+
+- include_tasks: radio.yml
+
+- include_tasks: commit.yml

@@ -1,0 +1,6 @@
+- name: Setup wireless
+  hosts: "{{ target | default('router') }}"
+  vars_files:
+    - vars/wireless.yml
+  roles:
+    - { role: wireless }

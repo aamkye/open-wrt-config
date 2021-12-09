@@ -1,0 +1,22 @@
+- name: Delete wireless
+  ansible.builtin.shell: |
+    uci delete wireless.radio0
+    uci delete wireless.radio1
+    uci delete wireless.radio2
+
+- name: Setup network.lan
+  ansible.builtin.shell: |
+    uci add wireless radio0
+    uci set wireless.radio0="{{ wireless.radio[0].__type }}"
+    uci set wireless.radio0.path="{{ wireless.radio[0].path }}"
+    uci set wireless.radio0.disabled="{{ wireless.radio[0].disabled }}"
+
+    uci add wireless radio1
+    uci set wireless.radio1="{{ wireless.radio[1].__type }}"
+    uci set wireless.radio1.path="{{ wireless.radio[1].path }}"
+    uci set wireless.radio1.disabled="{{ wireless.radio[1].disabled }}"
+
+    uci add wireless radio2
+    uci set wireless.radio2="{{ wireless.radio[2].__type }}"
+    uci set wireless.radio2.path="{{ wireless.radio[2].path }}"
+    uci set wireless.radio2.disabled="{{ wireless.radio[2].disabled }}"

@@ -1,0 +1,10 @@
+- name: Setup all
+  hosts: "{{ target | default('router') }}"
+  vars_files:
+    - vars/wireless.yml
+    - vars/network.yml
+    - vars/dhcp.yml
+  roles:
+    - { role: wireless }
+    - { role: network }
+    - { role: dhcp }
