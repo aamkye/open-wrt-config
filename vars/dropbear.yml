@@ -1,0 +1,9 @@
+dropbear:
+  - __type: dropbear
+    port: '22'
+    interface: 'lan'
+    passwordauth: 'off'
+    rootpasswordauth: 'off'
+
+authorized_keys:
+  - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINCPCeqDxLSZz/1BVTQu62dU+D+mowjZc3aNE1HGbnUo

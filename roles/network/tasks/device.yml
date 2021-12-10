@@ -1,8 +1,6 @@
-#jinja2: trim_blocks:False
-
 - name: Get initial device number
   ansible.builtin.shell: |
-    uci show network | awk -F '.' '/=device/ {print $2}'| wc -l
+    uci show network | awk -F '.' '/=device/ {print $2}' | wc -l
   register: inital_device_number
 
 - name: Delete old device records

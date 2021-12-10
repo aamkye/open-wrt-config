@@ -4,10 +4,12 @@
     - vars/wireless.yml
     - vars/network.yml
     - vars/dhcp.yml
+    - vars/dropbear.yml
   roles:
     - { role: wireless }
     - { role: network }
     - { role: dhcp }
+    - { role: dropbear }
   tasks:
     - name: reboot
     - name: restart network-manager

@@ -1,6 +1,6 @@
 - name: Get initial host number
   ansible.builtin.shell: |
-    uci show dhcp | awk -F '.' '/=host/ {print $2}'| wc -l
+    uci show dhcp | awk -F '.' '/=host/ {print $2}' | wc -l
   register: inital_host_number
 
 - name: Delete old host records

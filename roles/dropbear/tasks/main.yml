@@ -1,0 +1,9 @@
+- include_tasks: clean.yml
+
+- include_tasks: dropbear.yml
+
+- include_tasks: authorized_keys.yml
+
+- include_tasks: passwd.yml
+
+- include_tasks: commit.yml

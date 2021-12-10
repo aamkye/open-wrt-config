@@ -1,0 +1,6 @@
+- name: Setup dropbear
+  hosts: "{{ target | default('router') }}"
+  vars_files:
+    - vars/dropbear.yml
+  roles:
+    - { role: dropbear }
