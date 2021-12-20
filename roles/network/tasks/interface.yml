@@ -1,0 +1,38 @@
+- name: Get initial interface number
+  ansible.builtin.shell: |
+    uci show network | awk -F '.' '/=interface/ {print $2}' | wc -l
+  register: inital_interface_number
+
+- name: Delete old interface records
+  ansible.builtin.shell: |
+    uci delete network.@interface[-1]
+  with_sequence: count={{ inital_interface_number.stdout }}
+
+- name: Setup network.interface
+  ansible.builtin.shell: |
+    uci add network {{ item.__name }}
+    uci set network.{{ item.__name }}="{{ item.__type }}"
+    {% if item.device is defined %}
+      uci set network.{{ item.__name }}.device="{{ item.device }}"
+    {% endif %}
+    {% if item.dhcpv4 is defined %}
+      uci set network.{{ item.__name }}.dhcpv4="{{ item.dhcpv4 }}"
+    {% endif %}
+    {% if item.gateway is defined %}
+      uci set network.{{ item.__name }}.gateway="{{ item.gateway }}"
+    {% endif %}
+    {% if item.ipaddr is defined %}
+      uci set network.{{ item.__name }}.ipaddr="{{ item.ipaddr }}"
+    {% endif %}
+    {% if item.netmask is defined %}
+      uci set network.{{ item.__name }}.netmask="{{ item.netmask }}"
+    {% endif %}
+    {% if item.proto is defined %}
+      uci set network.{{ item.__name }}.proto="{{ item.proto }}"
+    {% endif %}
+    {% if item.dns is defined %}
+      {% for single_dns in item.dns %}
+        uci add_list network.{{ item.__name }}.dns="{{ single_dns }}"
+      {% endfor %}
+    {% endif %}
+  loop: "{{ network.interface }}"

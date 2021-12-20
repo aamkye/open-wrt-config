@@ -2,8 +2,6 @@
 
 - include_tasks: device.yml
 
-- include_tasks: lan.yml
-
-- include_tasks: wan.yml
+- include_tasks: interface.yml
 
 - include_tasks: commit.yml

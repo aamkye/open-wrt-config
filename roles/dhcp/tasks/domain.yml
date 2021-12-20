@@ -1,0 +1,18 @@
+- name: Get initial domain number
+  ansible.builtin.shell: |
+    uci show dhcp | awk -F '.' '/=domain/ {print $2}' | wc -l
+  register: inital_domain_number
+
+- name: Delete old domain records
+  ansible.builtin.shell: |
+    uci delete dhcp.@domain[-1]
+  with_sequence: count={{ inital_domain_number.stdout }}
+
+- name: Setup dhcp.@domain
+  ansible.builtin.shell: |
+    uci add dhcp domain
+    uci set dhcp.@domain[-1]="{{ item.__type }}"
+    uci set dhcp.@domain[-1].name="{{ item.name }}"
+    uci set dhcp.@domain[-1].ip="{{ item.ip }}"
+  loop: "{{ dhcp.domain }}"
+

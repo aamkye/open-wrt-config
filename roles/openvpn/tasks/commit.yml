@@ -1,0 +1,3 @@
+- name: Commit openvpn changes
+  ansible.builtin.shell: |
+    uci commit openvpn

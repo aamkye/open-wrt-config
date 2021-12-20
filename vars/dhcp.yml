@@ -27,12 +27,12 @@ dhcp:
 
     - __type: host
       name: 'deco1'
-      mac: 'C0:06:C3:D4:D6:50'
+      mac: 'C0:06:C3:D4:D8:CC'
       ip: '10.255.0.10'
 
     - __type: host
       name: 'deco2'
-      mac: 'C0:06:C3:D4:D8:CC'
+      mac: 'C0:06:C3:D4:D6:50'
       ip: '10.255.0.11'
 
     - __type: host
@@ -40,3 +40,27 @@ dhcp:
       mac: 'C0:06:C3:D4:DA:3C'
       ip: '10.255.0.12'
 
+  domain:
+    - __type: domain
+      name: 'router'
+      ip: '10.255.0.1'
+
+    - __type: domain
+      name: 'nas'
+      ip: '10.255.0.2'
+
+    - __type: domain
+      name: 'rig'
+      ip: '10.255.0.3'
+
+    - __type: domain
+      name: 'deco1'
+      ip: '10.255.0.10'
+
+    - __type: domain
+      name: 'deco2'
+      ip: '10.255.0.11'
+
+    - __type: domain
+      name: 'deco3'
+      ip: '10.255.0.12'

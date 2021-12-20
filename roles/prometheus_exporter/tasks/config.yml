@@ -1,0 +1,6 @@
+- name: Configure prometheus on LAN
+  ansible.builtin.shell: |
+    uci set prometheus-node-exporter-lua.main.listen_interface='lan'
+    uci set prometheus-node-exporter-lua.main.listen_ipv6='0'
+    uci set prometheus-node-exporter-lua.main.listen_port='9100'
+    uci commit prometheus-node-exporter-lua

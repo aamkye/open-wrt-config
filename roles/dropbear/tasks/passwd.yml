@@ -2,4 +2,4 @@
   ansible.builtin.user:
     name: root
     update_password: always
-    password: "{{ 'Admin123' | password_hash('sha512') }}"
+    password: "{{ 'Admin123' }}"

@@ -1,0 +1,6 @@
+- name: Make clean workspace
+  ansible.builtin.shell: |
+    uci revert openvpn
+    uci delete openvpn.custom_config
+    uci delete openvpn.sample_client
+    uci delete openvpn.sample_server

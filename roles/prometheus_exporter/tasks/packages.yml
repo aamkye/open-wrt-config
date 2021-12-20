@@ -1,0 +1,10 @@
+- name: Install packages
+  community.general.opkg:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - prometheus-node-exporter-lua
+    - prometheus-node-exporter-lua-nat_traffic
+    - prometheus-node-exporter-lua-netstat
+    - prometheus-node-exporter-lua-openwrt

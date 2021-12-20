@@ -4,10 +4,10 @@ arch: "arm_cortex-a9_vfpv3-d16"
 packages:
   - name: zlib_1.2.11-3
     link: "{{link_base}}/packages-21.02/{{arch}}/base/zlib_1.2.11-3_{{arch}}.ipk"
-  - name: libpython3-3.9_3.9.7-1
-    link: "{{link_base}}/packages-21.02/{{arch}}/packages/libpython3-3.9_3.9.7-1_{{arch}}.ipk"
-  - name: python3-base_3.9.7-1
-    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-base_3.9.7-1_{{arch}}.ipk"
+  - name: libpython3-3.9_3.9.9-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/libpython3-3.9_3.9.9-1_{{arch}}.ipk"
+  - name: python3-base_3.9.9-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-base_3.9.9-1_{{arch}}.ipk"
   - name: coreutils_8.32-6
     link: "{{link_base}}/packages-21.02/{{arch}}/packages/coreutils_8.32-6_{{arch}}.ipk"
   - name: coreutils-base64_8.32-6
@@ -20,16 +20,16 @@ packages:
     link: "{{link_base}}/21.02.0/targets/mvebu/cortexa9/packages/librt_1.1.24-3_{{arch}}.ipk"
   - name: libuuid1_2.36.1-2
     link: "{{link_base}}/packages-21.02/{{arch}}/base/libuuid1_2.36.1-2_{{arch}}.ipk"
-  - name: python3-email_3.9.7-1
-    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-email_3.9.7-1_{{arch}}.ipk"
-  - name: python3-light_3.9.7-1
-    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-light_3.9.7-1_{{arch}}.ipk"
-  - name: python3-distutils_3.9.7-1
-    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-distutils_3.9.7-1_{{arch}}.ipk"
-  - name: python3-logging_3.9.7-1
-    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-logging_3.9.7-1_{{arch}}.ipk"
-  - name: python3-multiprocessing_3.9.7-1
-    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-multiprocessing_3.9.7-1_{{arch}}.ipk"
+  - name: python3-email_3.9.9-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-email_3.9.9-1_{{arch}}.ipk"
+  - name: python3-light_3.9.9-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-light_3.9.9-1_{{arch}}.ipk"
+  - name: python3-distutils_3.9.9-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-distutils_3.9.9-1_{{arch}}.ipk"
+  - name: python3-logging_3.9.9-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-logging_3.9.9-1_{{arch}}.ipk"
+  - name: python3-multiprocessing_3.9.9-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-multiprocessing_3.9.9-1_{{arch}}.ipk"
   - name: shadow-common_4.8.1-3
     link: "{{link_base}}/21.02.0/packages/{{arch}}/packages/shadow-common_4.8.1-3_{{arch}}.ipk"
   - name: shadow-usermod_4.8.1-3

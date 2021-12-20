@@ -1,0 +1,6 @@
+- name: Setup openvpn
+  hosts: "{{ target | default('router') }}"
+  vars_files:
+    - vars/openvpn.yml
+  roles:
+    - { role: openvpn }

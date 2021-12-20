@@ -2,6 +2,8 @@
 
 - include_tasks: host.yml
 
+- include_tasks: domain.yml
+
 - include_tasks: lan.yml
 
 - include_tasks: wan.yml

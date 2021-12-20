@@ -1,27 +1,29 @@
 network:
   device:
     - __type: 'device'
-      name: 'br-lan'
+      name: 'lan'
       type: 'bridge'
       ports:
         - 'lan1'
         - 'lan2'
         - 'lan3'
         - 'lan4'
+
     - __type: 'device'
       name: 'wan'
       macaddr: 'ea:9f:80:1c:99:90'
 
-  lan:
+  interface:
     - __type: 'interface'
-      device: 'br-lan'
+      __name: 'lan'
+      device: 'lan'
       proto: 'static'
       netmask: '255.255.255.0'
       ipaddr: '10.255.0.1'
       dhcpv4: 'server'
 
-  wan:
     - __type: 'interface'
+      __name: 'wan'
       device: 'wan'
       proto: 'static'
       ipaddr: '192.168.101.41'
@@ -30,3 +32,8 @@ network:
       dns:
         - '1.1.1.1'
         - '1.0.0.1'
+
+    - __type: interface
+      __name: 'vpn'
+      device: 'tun0'
+      proto: 'none'

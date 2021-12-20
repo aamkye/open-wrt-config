@@ -1,0 +1,8 @@
+- name: Install packages
+  community.general.opkg:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - openvpn-openssl
+    - luci-app-openvpn
