@@ -6,6 +6,6 @@
 
 - include_tasks: lan.yml
 
-- include_tasks: wan.yml
+# - include_tasks: wan.yml
 
 - include_tasks: commit.yml

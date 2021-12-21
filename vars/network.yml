@@ -1,45 +1,53 @@
 network:
   device:
     - __type: device
-      name: lan
-      type: bridge
-      ports:
-        - lan1
-        - lan2
-        - lan3
-        - lan4
+      __fields:
+        name: lan
+        ipv6: 0
+        acceptlocal: 1
+        type: bridge
+        ports:
+          - lan1
+          - lan2
+          - lan3
+          - lan4
 
     - __type: device
-      name: wan
-      macaddr: !vault |
-        $ANSIBLE_VAULT;1.2;AES256;id
-        32336136636539323963393234386661653834636339616565323665663366373436613461373239
-        3866646264346535613034656431373762633566323433640a363937666262303366313632313463
-        62613135623762343038343665666262663736376236636435346139336337626139386561343330
-        6566333536633730650a356336653136396535303439383561376232343234666161356239356636
-        63326139646362346535303664303063653239323537323338326537363531386233
+      __fields:
+        name: wan
+        ipv6: 0
+        macaddr: !vault |
+          $ANSIBLE_VAULT;1.2;AES256;id
+          32336136636539323963393234386661653834636339616565323665663366373436613461373239
+          3866646264346535613034656431373762633566323433640a363937666262303366313632313463
+          62613135623762343038343665666262663736376236636435346139336337626139386561343330
+          6566333536633730650a356336653136396535303439383561376232343234666161356239356636
+          63326139646362346535303664303063653239323537323338326537363531386233
 
   interface:
     - __type: interface
       __name: lan
-      device: lan
-      proto: static
-      netmask: 255.255.255.0
-      ipaddr: 10.255.0.1
-      dhcpv4: server
+      __fields:
+        device: lan
+        proto: static
+        netmask: 255.255.255.0
+        ipaddr: 10.255.0.1
+        dhcpv4: server
 
     - __type: interface
       __name: wan
-      device: wan
-      proto: static
-      ipaddr: 192.168.101.41
-      netmask: 255.255.255.248
-      gateway: 192.168.101.46
-      dns:
-        - 1.1.1.1
-        - 1.0.0.1
+      __fields:
+        device: wan
+        proto: static
+        ipaddr: 192.168.101.41
+        netmask: 255.255.255.248
+        gateway: 192.168.101.46
+        dns:
+          - 1.1.1.1
+          - 1.0.0.1
 
     - __type: interface
       __name: vpn
-      device: tun0
-      proto: none
+      __fields:
+        device: tun0
+        proto: none

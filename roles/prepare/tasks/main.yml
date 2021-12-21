@@ -9,20 +9,20 @@
 
 - name: Prepare folder
   delegate_to: localhost
-  file:
+  ansible.builtin.file:
     state: "directory"
     path: "./packages"
 
 - name: Clean folder
   delegate_to: localhost
-  file:
+  ansible.builtin.file:
     state: "absent"
     path: "./packages/{{ item.name }}_{{ arch }}.ipk"
   loop: "{{ packages }}"
 
 - name: Download packages
   delegate_to: localhost
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ item.link }}"
     dest: "./packages/{{ item.name }}_{{ arch }}.ipk"
   loop: "{{ packages }}"

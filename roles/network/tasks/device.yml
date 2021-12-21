@@ -10,23 +10,15 @@
 
 - name: Setup network.@device
   ansible.builtin.shell: |
-    uci add network device
-    uci set network.@device[-1]="{{ item.__type }}"
-    {% if item.name is defined %}
-      uci set network.@device[-1].name="{{ item.name }}"
-    {% endif %}
-    {% if item.type is defined %}
-      uci set network.@device[-1].type="{{ item.type }}"
-    {% endif %}
-    {% if item.type is defined %}
-      uci set network.@device[-1].type="{{ item.type }}"
-    {% endif %}
-    {% if item.ports is defined %}
-      {% for port in item.ports %}
-        uci add_list network.@device[-1].ports="{{ port }}"
-      {% endfor %}
-    {% endif %}
-    {% if item.macaddr is defined %}
-      uci set network.@device[-1].macaddr="{{ item.macaddr }}"
-    {% endif %}
+    uci add network {{ item.__type }}
+    uci set network.@{{ item.__type }}[-1]="{{ item.__type }}"
+    {% for key, value in item.__fields.items() %}
+      {% if value.__class__.__name__ == 'list' %}
+        {% for _item in value %}
+          uci add_list network.@{{ item.__type }}[-1].{{ key }}="{{ _item }}"
+        {% endfor %}
+      {% else %}
+        uci set network.@{{ item.__type }}[-1].{{ key }}={{ value }}
+      {% endif %}
+    {% endfor %}
   loop: "{{ network.device }}"

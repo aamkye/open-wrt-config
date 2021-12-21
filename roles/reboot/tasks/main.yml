@@ -1,0 +1,15 @@
+- name: Reboot the server
+  ansible.builtin.shell: |
+    sleep 5 && reboot
+  async: 1
+  poll: 0
+
+- name: Wait for the reboot and reconnect
+  ansible.builtin.wait_for:
+    port: 22
+    host: "{{ desired_target | default('10.255.0.1') }}"
+    search_regex: OpenSSH
+    delay: 10
+    sleep: 5
+    timeout: 600
+  connection: local

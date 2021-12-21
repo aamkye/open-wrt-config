@@ -1,5 +1,5 @@
 - name: Install
-  hosts: "{{ target | default('router') }}"
+  hosts: "{{ 'localhost' }}"
   vars_files:
     - vars/packages.yml
   roles:

@@ -10,8 +10,4 @@
     - { role: network }
     - { role: dhcp }
     - { role: dropbear }
-    - { role: prometheus_exporter }
-  tasks:
-    - name: reboot
-    - name: restart network-manager
-    - name: wait-for
+    - { role: reboot }

@@ -1,5 +1,3 @@
-- name: Change user password
-  ansible.builtin.user:
-    name: root
-    update_password: always
-    password: "{{ 'Admin123' }}"
+- name: Change root password
+  ansible.builtin.shell: |
+    echo -e "{{ password }}\n{{ password }}" | passwd root

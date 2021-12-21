@@ -24,10 +24,10 @@ packages:
     link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-email_3.9.9-1_{{arch}}.ipk"
   - name: python3-light_3.9.9-1
     link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-light_3.9.9-1_{{arch}}.ipk"
-  - name: python3-distutils_3.9.9-1
-    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-distutils_3.9.9-1_{{arch}}.ipk"
   - name: python3-logging_3.9.9-1
     link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-logging_3.9.9-1_{{arch}}.ipk"
+  - name: python3-distutils_3.9.9-1
+    link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-distutils_3.9.9-1_{{arch}}.ipk"
   - name: python3-multiprocessing_3.9.9-1
     link: "{{link_base}}/packages-21.02/{{arch}}/packages/python3-multiprocessing_3.9.9-1_{{arch}}.ipk"
   - name: shadow-common_4.8.1-3
