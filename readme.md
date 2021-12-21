@@ -13,3 +13,11 @@ opkg upgrade $(opkg list-upgradable | awk '{ print $1 }')
 
 uci show dropbear; ls -l /etc/dropbear; cat /etc/dropbear/authorized_keys
 ```
+
+## Restarts:
+
+### Soft reset
+* `firstboot -y && reboot now`
+
+### Hard reset
+* `umount /overlay && jffs2reset && reboot now`
