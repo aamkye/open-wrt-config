@@ -1,5 +1,5 @@
-link_base: "https://downloads.openwrt.org/releases"
-arch: "arm_cortex-a9_vfpv3-d16"
+link_base: https://downloads.openwrt.org/releases
+arch: arm_cortex-a9_vfpv3-d16
 
 packages:
   - name: zlib_1.2.11-3

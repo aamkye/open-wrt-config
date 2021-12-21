@@ -1,38 +1,66 @@
 openvpn:
-    - __type: 'openvpn'
-      __name: 'VyprVPN'
-      dev: 'tun'
-      nobind: '1'
-      verb: '3'
-      comp_lzo: 'yes'
-      float: '0'
-      ifconfig_noexec: '0'
-      ifconfig_nowarn: '0'
-      mtu_test: '0'
-      route_noexec: '0'
-      tun_mtu: '1500'
+    - __type: openvpn
+      __name: VyprVPN
+      dev: tun
+      nobind: 1
+      verb: 3
+      comp_lzo: yes
+      float: 0
+      ifconfig_noexec: 0
+      ifconfig_nowarn: 0
+      mtu_test: 0
+      route_noexec: 0
+      tun_mtu: 1500
       keepalive: '10 60'
-      ping_timer_rem: '0'
-      persist_tun: '1'
-      persist_key: '1'
-      persist_local_ip: '0'
-      persist_remote_ip: '1'
-      management_query_passwords: '0'
-      management_hold: '0'
-      client: '1'
-      pull: '0'
-      auth_user_pass: '/etc/openvpn/password.txt'
-      remote_random: '1'
-      proto: 'udp'
-      http_proxy_retry: '0'
-      resolv_retry: 'infinite'
-      mute_replay_warnings: '0'
-      tls_client: '1'
-      ca: '/etc/openvpn/ca.vyprvpn.com.crt'
-      single_session: '0'
-      tls_exit: '0'
-      auth_nocache: '1'
-      enabled: '1'
-      data_cipher: 'BF-CBC'
+      ping_timer_rem: 0
+      persist_tun: 1
+      persist_key: 1
+      persist_local_ip: 0
+      persist_remote_ip: 1
+      management_query_passwords: 0
+      management_hold: 0
+      client: 1
+      pull: 0
+      auth_user_pass: !vault |
+        $ANSIBLE_VAULT;1.2;AES256;id
+        36643133303463326166363238616263626233363737353365623361636331646339666235616239
+        3062386438653533333036386562313761393835326437620a376431666135643363646334656334
+        63393932323564306431373534363134333562353539323034653761623635303438636463623239
+        3638343436303734310a323765643234653431623661336230316665613161353831623561333361
+        39396339646636633266616462376562633261636465383834306366653762373638
+      remote_random: 1
+      proto: udp
+      http_proxy_retry: 0
+      resolv_retry: infinite
+      mute_replay_warnings: 0
+      tls_client: 1
+      ca: /etc/openvpn/ca.vyprvpn.com.crt
+      single_session: 0
+      tls_exit: 0
+      auth_nocache: 1
+      enabled: 1
+      data_cipher: BF-CBC
       # https://support.vyprvpn.com/hc/en-us/articles/360037728912
-      remote: 'es1.vpn.goldenfrog.com'
+      remote: !vault |
+        $ANSIBLE_VAULT;1.2;AES256;id
+        65353930306162643030303661653166393261313862616566613739613838363232616537626238
+        6462663538316364333963356166626563303566626130660a313862623566613634356235636431
+        30373563356162623135383564376266396438366366343434383431626237623938636231653139
+        6237663565343864350a643632626536646535613231643536643732646532396161643939303138
+        66363063366231643231333531336438626630626438303835636666653464323137
+
+vypr_credentials:
+  username: !vault |
+    $ANSIBLE_VAULT;1.2;AES256;id
+    37326534643333396366633564656237623132636462383832616635633838613865653936363432
+    6431633237616530333830643661383061613536333638660a316365373830636364636461343238
+    64346261346563646163393634663230653332343730653964336561306235386633336238623563
+    6137666534343739640a653335343763356566323464386434666337626163613165303835663361
+    61343731393762653935393661326461393234626239646162326236663161363539
+  password: !vault |
+    $ANSIBLE_VAULT;1.2;AES256;id
+    37313530653532613161373738323637663564616530616564373265316265366335323461376430
+    6531376239623364663838393966643338633032386337660a326461623132656539383733663935
+    62343531323530363734363731333234613435633964646230363939303638646533626637613630
+    6135643636633133390a343333393631303238626461363030346637323762353832383232653933
+    62666339636630663132343231306431623935633132343633613366336330373634
