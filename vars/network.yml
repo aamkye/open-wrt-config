@@ -33,6 +33,9 @@ network:
         netmask: 255.255.255.0
         ipaddr: 10.255.0.1
         dhcpv4: server
+        dns:
+          - 1.1.1.1
+          - 1.0.0.1
 
     - __type: interface
       __name: wan

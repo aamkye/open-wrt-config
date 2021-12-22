@@ -1,0 +1,20 @@
+- name: Delete old vpn records
+  ignore_errors: true
+  ansible.builtin.shell: |
+    uci delete openvpn.{{ item.__name }} | true
+  loop: "{{ openvpn }}"
+
+- name: Setup openvpn.@openvpn
+  ansible.builtin.shell: |
+    uci add openvpn {{ item.__name }}
+    uci set openvpn.{{ item.__name }}="{{ item.__type }}"
+    {% for key, value in item.__fields.items() %}
+      {% if value.__class__.__name__ == 'list' %}
+        {% for _item in value %}
+          uci add_list openvpn.{{ item.__name }}.{{ key }}="{{ _item }}"
+        {% endfor %}
+      {% else %}
+        uci set openvpn.{{ item.__name }}.{{ key }}={{ value }}
+      {% endif %}
+    {% endfor %}
+  loop: "{{ openvpn }}"
