@@ -1,17 +1,20 @@
 openvpn:
-    - __type: openvpn
-      __name: VyprVPN
+  - __type: openvpn
+    __name: VyprVPN
+    __fields:
       dev: tun
       nobind: 1
       verb: 3
-      comp_lzo: yes
+      comp_lzo: 'yes'
       float: 0
       ifconfig_noexec: 0
       ifconfig_nowarn: 0
       mtu_test: 0
       route_noexec: 0
       tun_mtu: 1500
-      keepalive: '10 60'
+      keepalive:
+        - 10
+        - 60
       ping_timer_rem: 0
       persist_tun: 1
       persist_key: 1
@@ -39,6 +42,7 @@ openvpn:
       tls_exit: 0
       auth_nocache: 1
       enabled: 1
+      cipher: BF-CBC
       data_cipher: BF-CBC
       # https://support.vyprvpn.com/hc/en-us/articles/360037728912
       remote: !vault |
@@ -50,14 +54,14 @@ openvpn:
         66363063366231643231333531336438626630626438303835636666653464323137
 
 vypr_credentials:
-  username: !vault |
+  - !vault |
     $ANSIBLE_VAULT;1.2;AES256;id
     37326534643333396366633564656237623132636462383832616635633838613865653936363432
     6431633237616530333830643661383061613536333638660a316365373830636364636461343238
     64346261346563646163393634663230653332343730653964336561306235386633336238623563
     6137666534343739640a653335343763356566323464386434666337626163613165303835663361
     61343731393762653935393661326461393234626239646162326236663161363539
-  password: !vault |
+  - !vault |
     $ANSIBLE_VAULT;1.2;AES256;id
     37313530653532613161373738323637663564616530616564373265316265366335323461376430
     6531376239623364663838393966643338633032386337660a326461623132656539383733663935

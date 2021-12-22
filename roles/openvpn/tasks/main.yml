@@ -2,6 +2,8 @@
 
 - include_tasks: clean.yml
 
+- include_tasks: preconfig.yml
+
 - include_tasks: config.yml
 
 - include_tasks: commit.yml

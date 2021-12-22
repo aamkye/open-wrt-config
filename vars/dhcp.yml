@@ -2,7 +2,6 @@ dhcp:
   lan:
     - __type: dhcp
       interface: lan
-      # interface: $(uci -N show $(uci show network | grep -E '(.*interface\[.+\])\.name=.lan.' | cut -d. -f 1,2).name) | awk -F '.' "/name='lan'/ {print $1}" | cut -d "." -f 2
       start: 100
       limit: 150
       leasetime: 15m

@@ -1,0 +1,199 @@
+firewall:
+  defaults:
+    - __type: defaults
+      __fields:
+        forward: REJECT
+        input: ACCEPT
+        output: ACCEPT
+        synflood_protect: 1
+
+
+  forwarding:
+    - __type: forwarding
+      __fields:
+        src: lan
+        dest: wan
+
+    - __type: forwarding
+      __fields:
+        src: vpn
+        dest: lan
+
+    - __type: forwarding
+      __fields:
+        src: vpn
+        dest: wan
+
+    - __type: forwarding
+      __fields:
+        src: lan
+        dest: vpn
+
+  rule:
+    - __type: rule
+      __fields:
+        dest_port: 68
+        family: ipv4
+        name: Allow-DHCP-Renew
+        proto: udp
+        src: wan
+        target: ACCEPT
+
+
+    - __type: rule
+      __fields:
+        family: ipv4
+        icmp_type: echo-request
+        name: Allow-Ping
+        proto: icmp
+        src: wan
+        target: ACCEPT
+
+    - __type: rule
+      __fields:
+        family: ipv4
+        name: Allow-IGMP
+        proto: igmp
+        src: wan
+        target: ACCEPT
+
+    - __type: rule
+      __fields:
+        dest_ip: fc00::/6
+        dest_port: 546
+        family: ipv6
+        name: Allow-DHCPv6
+        proto: udp
+        src_ip: fc00::/6
+        src: wan
+        target: ACCEPT
+
+    - __type: rule
+      __fields:
+        family: ipv6
+        icmp_type:
+          - 130/0
+          - 131/0
+          - 132/0
+          - 143/0
+        name: Allow-MLD
+        proto: icmp
+        src_ip: fe80::/10
+        src: wan
+        target: ACCEPT
+
+    - __type: rule
+      __fields:
+        family: ipv6
+        icmp_type:
+          - echo-request
+          - echo-reply
+          - destination-unreachable
+          - packet-too-big
+          - time-exceeded
+          - bad-header
+          - unknown-header-type
+          - router-solicitation
+          - neighbour-solicitation
+          - router-advertisement
+          - neighbour-advertisement
+        limit: 1000/sec
+        name: Allow-ICMPv6-Input
+        proto: icmp
+        src: wan
+        target: ACCEPT
+
+    - __type: rule
+      __fields:
+        dest: '*'
+        family: ipv6
+        icmp_type:
+          - echo-request
+          - echo-reply
+          - destination-unreachable
+          - packet-too-big
+          - time-exceeded
+          - bad-header
+          - unknown-header-type
+        limit: 1000/sec
+        name: Allow-ICMPv6-Forward
+        proto: icmp
+        src: wan
+        target: ACCEPT
+
+    - __type: rule
+      __fields:
+        dest: lan
+        name: Allow-IPSec-ESP
+        proto: esp
+        src: wan
+        target: ACCEPT
+
+    - __type: rule
+      __fields:
+        dest_port: 500
+        dest: lan
+        name: Allow-ISAKMP
+        proto: udp
+        src: wan
+        target: ACCEPT
+
+    - __type: rule
+      __fields:
+        dest_port: 33434:33689
+        enabled: false
+        family: ipv4
+        name: Support-UDP-Traceroute
+        proto: udp
+        src: wan
+        target: REJECT
+
+  zone:
+    - __type: zone
+      __fields:
+        name: lan
+        network: lan
+        input: ACCEPT
+        output: ACCEPT
+        forward: ACCEPT
+
+    - __type: zone
+      __fields:
+        name: wan
+        network: wan
+        input: REJECT
+        output: ACCEPT
+        forward: REJECT
+        masq: 1
+        mtu_fix: 1
+
+    - __type: zone
+      __fields:
+        name: vpn
+        network: vpn
+        input: REJECT
+        output: ACCEPT
+        forward: REJECT
+        masq: 1
+        mtu_fix: 1
+
+  redirect:
+    - __type: redirect
+      __fields:
+        target: DNAT
+        name: SSH-over-WAN
+        src: wan
+        src_dport: 10022
+        dest: lan
+        dest_ip: 10.255.0.1
+        dest_port: 22
+
+    - __type: redirect
+      __fields:
+        target: DNAT
+        name: WEB-over-WAN
+        src: wan
+        src_dport: 10080
+        dest: lan
+        dest_ip: 10.255.0.1
+        dest_port: 80

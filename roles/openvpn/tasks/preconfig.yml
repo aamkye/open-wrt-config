@@ -1,0 +1,23 @@
+- name: Add password.txt
+  ansible.builtin.lineinfile:
+    path: /etc/openvpn/password.txt
+    line: "{{ item }}"
+    create: true
+  loop: "{{ vypr_credentials }}"
+
+- name: Download ca.vyprvpn.com.crt
+  delegate_to: localhost
+  run_once: true
+  ansible.builtin.get_url:
+    url: https://support.vyprvpn.com/hc/article_attachments/360052748711/ca.vyprvpn.com.crt
+    dest: "{{ tmp_dir }}/ca.vyprvpn.com.crt"
+    validate_certs: false
+    mode: 0644
+
+- name: Upload ca.vyprvpn.com.crt
+  ansible.builtin.copy:
+    src: "{{ tmp_dir }}/ca.vyprvpn.com.crt"
+    dest: /etc/openvpn/ca.vyprvpn.com.crt
+    owner: root
+    group: root
+    mode: 0644
