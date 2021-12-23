@@ -7,7 +7,6 @@ firewall:
         output: ACCEPT
         synflood_protect: 1
 
-
   forwarding:
     - __type: forwarding
       __fields:
