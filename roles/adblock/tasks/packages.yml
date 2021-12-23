@@ -6,3 +6,4 @@
   loop:
     - adblock
     - luci-app-adblock
+    - tcpdump-mini

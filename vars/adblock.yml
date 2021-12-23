@@ -7,7 +7,7 @@ adblock:
       adb_forcedns: 0
       adb_dnsfilereset: 0
       adb_mail: 0
-      adb_report: 0
+      adb_report: 1
       adb_backup: 1
       adb_maxqueue: 4
       adb_trigger: wan
