@@ -18,6 +18,7 @@ adblock:
         - adaway
         - adguard
         - adguard_tracking
+        - android_tracking
         - disconnect
         - oisd_basic
         - openphish
