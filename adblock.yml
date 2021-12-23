@@ -1,6 +1,6 @@
-- name: Setup all+
+- name: Setup adblock
   hosts: "{{ target | default('router') }}"
+  vars_files:
+    - vars/adblock.yml
   roles:
-    - { role: prometheus_exporter }
     - { role: adblock }
-
