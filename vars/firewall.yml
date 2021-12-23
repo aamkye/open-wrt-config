@@ -7,29 +7,6 @@ firewall:
         output: ACCEPT
         synflood_protect: 1
 
-  forwarding:
-    - __type: forwarding
-      __fields:
-        src: lan
-        dest: wan
-
-    - __type: forwarding
-      __fields:
-        src: vpn
-        dest: lan
-
-    - __type: forwarding
-      __fields:
-        src: vpn
-        dest: wan
-
-    - __type: forwarding
-      __fields:
-        src: lan
-        dest: vpn
-
-  rule:
-
   zone:
     - __type: zone
       __fields:
@@ -58,6 +35,29 @@ firewall:
         forward: REJECT
         masq: 1
         mtu_fix: 1
+
+  forwarding:
+    - __type: forwarding
+      __fields:
+        src: lan
+        dest: wan
+
+    - __type: forwarding
+      __fields:
+        src: vpn
+        dest: lan
+
+    - __type: forwarding
+      __fields:
+        src: vpn
+        dest: wan
+
+    - __type: forwarding
+      __fields:
+        src: lan
+        dest: vpn
+
+  rule:
 
   redirect:
     - __type: redirect
