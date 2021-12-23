@@ -5,9 +5,11 @@
     - vars/network.yml
     - vars/dhcp.yml
     - vars/dropbear.yml
+    - vars/firewall.yml
   roles:
     - { role: wireless }
     - { role: network }
     - { role: dhcp }
     - { role: dropbear }
+    - { role: firewall }
     - { role: reboot }

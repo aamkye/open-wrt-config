@@ -1,0 +1,6 @@
+- name: Setup firewall
+  hosts: "{{ target | default('router') }}"
+  vars_files:
+    - vars/firewall.yml
+  roles:
+    - { role: firewall }
