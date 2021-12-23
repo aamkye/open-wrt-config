@@ -1,0 +1,13 @@
+- include_tasks: clean.yml
+
+- include_tasks: defaults.yml
+
+- include_tasks: zone.yml
+
+- include_tasks: forwarding.yml
+
+- include_tasks: rule.yml
+
+- include_tasks: redirect.yml
+
+- include_tasks: commit.yml
