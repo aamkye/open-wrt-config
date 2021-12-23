@@ -30,58 +30,6 @@ firewall:
         dest: vpn
 
   rule:
-    - __type: rule
-      __fields:
-        dest_port: 68
-        family: ipv4
-        name: Allow-DHCP-Renew
-        proto: udp
-        src: wan
-        target: ACCEPT
-
-    - __type: rule
-      __fields:
-        family: ipv4
-        icmp_type: echo-request
-        name: Allow-Ping
-        proto: icmp
-        src: wan
-        target: ACCEPT
-
-    - __type: rule
-      __fields:
-        family: ipv4
-        name: Allow-IGMP
-        proto: igmp
-        src: wan
-        target: ACCEPT
-
-    - __type: rule
-      __fields:
-        dest: lan
-        name: Allow-IPSec-ESP
-        proto: esp
-        src: wan
-        target: ACCEPT
-
-    - __type: rule
-      __fields:
-        dest_port: 500
-        dest: lan
-        name: Allow-ISAKMP
-        proto: udp
-        src: wan
-        target: ACCEPT
-
-    - __type: rule
-      __fields:
-        dest_port: 33434:33689
-        enabled: false
-        family: ipv4
-        name: Support-UDP-Traceroute
-        proto: udp
-        src: wan
-        target: REJECT
 
   zone:
     - __type: zone
