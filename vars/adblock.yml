@@ -1,0 +1,38 @@
+adblock:
+  - __type: adblock
+    __name: global
+    __fields:
+      adb_enabled: 1
+      adb_debug: 0
+      adb_forcedns: 0
+      adb_dnsfilereset: 0
+      adb_mail: 0
+      adb_report: 0
+      adb_backup: 1
+      adb_maxqueue: 4
+      adb_trigger: wan
+      adb_dns: dnsmasq
+      adb_fetchutil: uclient-fetch
+      adb_fetchinsecure: 1
+      adb_sources:
+        - adaway
+        - adguard
+        - adguard_tracking
+        - disconnect
+        - oisd_basic
+        - openphish
+        - phishing_army
+        - spam404
+        - stalkerware
+        - stopforumspam
+        - wally3k
+        - whocares
+        - winhelp
+        - winspy
+        - yoyo
+      adb_safesearch: 1
+      adb_safesearchlist:
+        - google
+        - youtube
+      adb_safesearchmod: 1
+      adb_dnsinstance: 0

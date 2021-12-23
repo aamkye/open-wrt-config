@@ -1,0 +1,7 @@
+- name: Commit adblock changes
+  ansible.builtin.shell: |
+    uci commit adblock
+
+- name: Restart adblock
+  ansible.builtin.shell: |
+    /etc/init.d/adblock restart
