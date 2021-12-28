@@ -21,3 +21,35 @@ uci show dropbear; ls -l /etc/dropbear; cat /etc/dropbear/authorized_keys
 
 ### Hard reset
 * `umount /overlay && jffs2reset && reboot now`
+
+## Types:
+
+### Managed:
+
+```yaml
+<type>:
+  - __type: <type>
+    __name: <name>
+    __fields:
+      field1: 1
+      field2: 0
+  - __type: <type>
+    __name: <name>
+    __fields:
+      field1: 2
+      field2: 5
+```
+
+### Un-managed:
+
+```yaml
+<type>:
+  - __type: <type>
+    __fields:
+      field1: 1
+      field2: 0
+  - __type: <type>
+    __fields:
+      field1: 2
+      field2: 5
+```

@@ -4,7 +4,6 @@ adblock:
     __fields:
       adb_enabled: 1
       adb_debug: 0
-      adb_forcedns: 0
       adb_dnsfilereset: 0
       adb_mail: 0
       adb_report: 1
@@ -20,7 +19,7 @@ adblock:
         - adguard_tracking
         - android_tracking
         - disconnect
-        - oisd_basic
+        - oisd_full
         - openphish
         - phishing_army
         - spam404
@@ -37,3 +36,11 @@ adblock:
         - youtube
       adb_safesearchmod: 1
       adb_dnsinstance: 0
+      adb_forcedns: 1
+      adb_portlist:
+        - 53
+        - 853
+        - 5353
+      adb_zonelist:
+        - lan
+        - vpn
