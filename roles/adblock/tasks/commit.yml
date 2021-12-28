@@ -4,4 +4,4 @@
 
 - name: Restart adblock
   ansible.builtin.shell: |
-    /etc/init.d/adblock restart
+    service adblock restart

@@ -1,4 +1,4 @@
-- name: Setup all+
+- name: Post setup
   hosts: "{{ target | default('router') }}"
   roles:
     - { role: prometheus_exporter }
