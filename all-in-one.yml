@@ -12,4 +12,5 @@
     - { role: dhcp }
     - { role: dropbear }
     - { role: firewall }
+    - { role: uhttpd }
     - { role: reboot }

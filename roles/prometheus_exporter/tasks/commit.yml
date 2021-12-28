@@ -1,5 +1,5 @@
 - name: Commit prometheus-node-exporter-lua changes
   ansible.builtin.shell: |
     uci commit prometheus-node-exporter-lua
-    /etc/init.d/prometheus-node-exporter-lua restart
+    service prometheus-node-exporter-lua restart
 
