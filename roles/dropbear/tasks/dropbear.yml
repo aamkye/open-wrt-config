@@ -1,20 +1,30 @@
-- name: Get initial dropbear number
+- name: Delete old dropbear.dropbear
   ansible.builtin.shell: |
-    uci show dropbear | awk -F '.' '/=dropbear/ {print $2}' | wc -l
-  register: inital_dropbear_number
+    while uci -q delete dropbear.@dropbear[-1]; do :; done
 
-- name: Delete old dropbear records
+- name: Setup dropbear.dropbear
   ansible.builtin.shell: |
-    uci delete dropbear.@dropbear[-1]
-  with_sequence: count={{ inital_dropbear_number.stdout }}
+    {% set add_id = namespace(value="") %}
+    {% set added_id = namespace(value="") %}
 
-- name: Setup dropbear.@dropbear
-  ansible.builtin.shell: |
-    uci add dropbear dropbear
-    uci set dropbear.@dropbear[-1]="{{ item.__type }}"
-    uci set dropbear.@dropbear[-1].Port="{{ item.port }}"
-    uci set dropbear.@dropbear[-1].Interface="{{ item.interface }}"
-    uci set dropbear.@dropbear[-1].PasswordAuth="{{ item.passwordauth }}"
-    uci set dropbear.@dropbear[-1].RootPasswordAuth="{{ item.rootpasswordauth }}"
+    {% if item.__name is defined %}
+      {% set add_id.value = item.__name %}
+      {% set added_id.value = item.__name %}
+    {% else %}
+      {% set add_id.value = item.__type %}
+      {% set added_id.value = "@" + item.__type + "[-1]" %}
+    {% endif %}
+
+    uci add {{ item.__root }} {{ add_id.value }}
+    uci set {{ item.__root }}.{{ added_id.value }}="{{ item.__type }}"
+    {% for key, value in item.__fields.items() %}
+      {% if value.__class__.__name__ == 'list' %}
+        {% for _item in value %}
+          uci add_list {{ item.__root }}.{{ added_id.value }}.{{ key }}="{{ _item }}"
+        {% endfor %}
+      {% else %}
+        uci set {{ item.__root }}.{{ added_id.value }}.{{ key }}={{ value }}
+      {% endif %}
+    {% endfor %}
 
   loop: "{{ dropbear }}"

@@ -1,5 +1,6 @@
 openvpn:
   - __type: openvpn
+    __root: openvpn
     __name: VyprVPN
     __fields:
       dev: tun

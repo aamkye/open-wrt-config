@@ -1,18 +1,29 @@
-- name: Get initial domain number
+- name: Delete old dhcp.domain
   ansible.builtin.shell: |
-    uci show dhcp | awk -F '.' '/=domain/ {print $2}' | wc -l
-  register: inital_domain_number
+    while uci -q delete dhcp.@domain[-1]; do :; done
 
-- name: Delete old domain records
+- name: Setup dhcp.domain
   ansible.builtin.shell: |
-    uci delete dhcp.@domain[-1]
-  with_sequence: count={{ inital_domain_number.stdout }}
+    {% set add_id = namespace(value="") %}
+    {% set added_id = namespace(value="") %}
 
-- name: Setup dhcp.@domain
-  ansible.builtin.shell: |
-    uci add dhcp domain
-    uci set dhcp.@domain[-1]="{{ item.__type }}"
-    uci set dhcp.@domain[-1].name="{{ item.name }}"
-    uci set dhcp.@domain[-1].ip="{{ item.ip }}"
+    {% if item.__name is defined %}
+      {% set add_id.value = item.__name %}
+      {% set added_id.value = item.__name %}
+    {% else %}
+      {% set add_id.value = item.__type %}
+      {% set added_id.value = "@" + item.__type + "[-1]" %}
+    {% endif %}
+
+    uci add {{ item.__root }} {{ add_id.value }}
+    uci set {{ item.__root }}.{{ added_id.value }}="{{ item.__type }}"
+    {% for key, value in item.__fields.items() %}
+      {% if value.__class__.__name__ == 'list' %}
+        {% for _item in value %}
+          uci add_list {{ item.__root }}.{{ added_id.value }}.{{ key }}="{{ _item }}"
+        {% endfor %}
+      {% else %}
+        uci set {{ item.__root }}.{{ added_id.value }}.{{ key }}={{ value }}
+      {% endif %}
+    {% endfor %}
   loop: "{{ dhcp.domain }}"
-

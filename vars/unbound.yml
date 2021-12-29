@@ -1,5 +1,6 @@
 unbound:
   - __type: unbound
+    __root: unbound
     __name: ub_main
     __fields:
       enabled: 1

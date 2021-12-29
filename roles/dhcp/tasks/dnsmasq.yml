@@ -1,8 +1,8 @@
-- name: Delete old dhcp.host
+- name: Delete old dhcp.dnsmasq
   ansible.builtin.shell: |
-    while uci -q delete dhcp.@host[-1]; do :; done
+    while uci -q delete dhcp.@dnsmasq[-1]; do :; done
 
-- name: Setup dhcp.host
+- name: Setup dhcp.dnsmasq
   ansible.builtin.shell: |
     {% set add_id = namespace(value="") %}
     {% set added_id = namespace(value="") %}
@@ -26,4 +26,4 @@
         uci set {{ item.__root }}.{{ added_id.value }}.{{ key }}={{ value }}
       {% endif %}
     {% endfor %}
-  loop: "{{ dhcp.host }}"
+  loop: "{{ dhcp.dnsmasq }}"
