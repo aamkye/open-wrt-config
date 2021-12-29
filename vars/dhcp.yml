@@ -143,5 +143,4 @@ dhcp:
         ednspacket_max: 1232
         confdir: /tmp/dnsmasq.d
         noresolv: 1
-        nohosts: 1
-        server: 10.255.0.1#1053
+        server: 127.0.0.1#1053
