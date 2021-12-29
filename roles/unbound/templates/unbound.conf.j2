@@ -3,6 +3,8 @@ server:
 
   use-syslog: yes
   interface-automatic: yes
+  statistics-cumulative: yes
+  extended-statistics: yes
   port: 1053
 
   private-address: 10.0.0.0/8
@@ -25,8 +27,6 @@ remote-control:
 
 forward-zone:
   name: "."
-  forward-addr: 1.1.1.1@853#cloudflare-dns.com
-  forward-addr: 1.0.0.1@853#cloudflare-dns.com
   forward-addr: 1.1.1.2@853#cloudflare-dns.com
   forward-addr: 1.0.0.2@853#cloudflare-dns.com
   forward-ssl-upstream: yes

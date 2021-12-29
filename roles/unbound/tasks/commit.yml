@@ -2,4 +2,4 @@
   ansible.builtin.shell: |
     uci commit unbound
 
-    service unbound restart
+    /etc/init.d/unbound restart
