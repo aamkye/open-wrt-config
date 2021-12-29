@@ -34,6 +34,5 @@ adblock:
         - google
         - youtube
       adb_safesearchmod: 1
-      adb_forcedns: 1
       adb_repiface:
         - lan
