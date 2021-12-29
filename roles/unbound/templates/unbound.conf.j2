@@ -1,0 +1,33 @@
+server:
+  tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
+
+  use-syslog: yes
+  interface-automatic: yes
+  port: 1053
+
+  private-address: 10.0.0.0/8
+  private-address: 100.64.0.0/10
+  private-address: 169.254.0.0/16
+  private-address: 172.16.0.0/12
+  private-address: 192.168.0.0/16
+  private-address: 127.0.0.0/8
+
+  access-control: 10.255.0.1/24 allow
+  access-control: 127.0.0.0/8 allow
+
+  include: /var/lib/unbound/adb_list.*
+
+remote-control:
+  control-enable: yes
+  control-use-cert: yes
+  control-interface: 127.0.0.1
+  control-interface: ::1
+
+forward-zone:
+  name: "."
+  forward-addr: 1.1.1.1@853#cloudflare-dns.com
+  forward-addr: 1.0.0.1@853#cloudflare-dns.com
+  forward-addr: 1.1.1.2@853#cloudflare-dns.com
+  forward-addr: 1.0.0.2@853#cloudflare-dns.com
+  forward-ssl-upstream: yes
+  forward-tls-upstream: yes

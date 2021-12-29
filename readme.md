@@ -12,6 +12,8 @@
 opkg upgrade $(opkg list-upgradable | awk '{ print $1 }')
 
 uci show dropbear; ls -l /etc/dropbear; cat /etc/dropbear/authorized_keys
+
+while uci -q delete dhcp.@dnsmasq[0]; do :; done
 ```
 
 ## Restarts:
