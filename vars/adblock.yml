@@ -3,14 +3,12 @@ adblock:
     __name: global
     __fields:
       adb_enabled: 1
-      adb_debug: 0
-      adb_dnsfilereset: 0
-      adb_mail: 0
       adb_report: 1
       adb_backup: 1
       adb_maxqueue: 4
+      adb_dnsflush: 1
       adb_trigger: wan
-      adb_dns: dnsmasq
+      adb_dns: unbound
       adb_fetchutil: uclient-fetch
       adb_fetchinsecure: 1
       adb_sources:
@@ -35,12 +33,11 @@ adblock:
         - google
         - youtube
       adb_safesearchmod: 1
-      adb_dnsinstance: 0
       adb_forcedns: 1
       adb_portlist:
         - 53
-        - 853
-        - 5353
       adb_zonelist:
         - lan
         - vpn
+      adb_repiface:
+        - lan
