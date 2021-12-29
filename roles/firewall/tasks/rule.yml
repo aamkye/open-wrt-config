@@ -1,24 +1,29 @@
-- name: Get initial rule number
+- name: Delete old firewall.rule
   ansible.builtin.shell: |
-    uci show firewall | awk -F '.' '/=rule/ {print $2}' | wc -l
-  register: inital_rule_number
+    while uci -q delete firewall.@rule[-1]; do :; done
 
-- name: Delete old rule records
+- name: Setup firewall.rule
   ansible.builtin.shell: |
-    uci delete firewall.@rule[-1]
-  with_sequence: count={{ inital_rule_number.stdout }}
+    {% set add_id = namespace(value="") %}
+    {% set added_id = namespace(value="") %}
 
-- name: Setup firewall.@rule
-  ansible.builtin.shell: |
-    uci add firewall {{ item.__type }}
-    uci set firewall.@{{ item.__type }}[-1]="{{ item.__type }}"
+    {% if item.__name is defined %}
+      {% set add_id.value = item.__name %}
+      {% set added_id.value = item.__name %}
+    {% else %}
+      {% set add_id.value = item.__type %}
+      {% set added_id.value = "@" + item.__type + "[-1]" %}
+    {% endif %}
+
+    uci add {{ item.__root }} {{ add_id.value }}
+    uci set {{ item.__root }}.{{ added_id.value }}="{{ item.__type }}"
     {% for key, value in item.__fields.items() %}
       {% if value.__class__.__name__ == 'list' %}
         {% for _item in value %}
-          uci add_list firewall.@{{ item.__type }}[-1].{{ key }}="{{ _item }}"
+          uci add_list {{ item.__root }}.{{ added_id.value }}.{{ key }}="{{ _item }}"
         {% endfor %}
       {% else %}
-        uci set firewall.@{{ item.__type }}[-1].{{ key }}={{ value }}
+        uci set {{ item.__root }}.{{ added_id.value }}.{{ key }}={{ value }}
       {% endif %}
     {% endfor %}
   loop: "{{ firewall.rule }}"

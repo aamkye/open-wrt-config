@@ -1,24 +1,29 @@
-- name: Get initial device number
+- name: Delete old network.device
   ansible.builtin.shell: |
-    uci show network | awk -F '.' '/=device/ {print $2}' | wc -l
-  register: inital_device_number
+    while uci -q delete network.@device[-1]; do :; done
 
-- name: Delete old device records
+- name: Setup network.device
   ansible.builtin.shell: |
-    uci delete network.@device[-1]
-  with_sequence: count={{ inital_device_number.stdout }}
+    {% set add_id = namespace(value="") %}
+    {% set added_id = namespace(value="") %}
 
-- name: Setup network.@device
-  ansible.builtin.shell: |
-    uci add network {{ item.__type }}
-    uci set network.@{{ item.__type }}[-1]="{{ item.__type }}"
+    {% if item.__name is defined %}
+      {% set add_id.value = item.__name %}
+      {% set added_id.value = item.__name %}
+    {% else %}
+      {% set add_id.value = item.__type %}
+      {% set added_id.value = "@" + item.__type + "[-1]" %}
+    {% endif %}
+
+    uci add {{ item.__root }} {{ add_id.value }}
+    uci set {{ item.__root }}.{{ added_id.value }}="{{ item.__type }}"
     {% for key, value in item.__fields.items() %}
       {% if value.__class__.__name__ == 'list' %}
         {% for _item in value %}
-          uci add_list network.@{{ item.__type }}[-1].{{ key }}="{{ _item }}"
+          uci add_list {{ item.__root }}.{{ added_id.value }}.{{ key }}="{{ _item }}"
         {% endfor %}
       {% else %}
-        uci set network.@{{ item.__type }}[-1].{{ key }}={{ value }}
+        uci set {{ item.__root }}.{{ added_id.value }}.{{ key }}={{ value }}
       {% endif %}
     {% endfor %}
   loop: "{{ network.device }}"

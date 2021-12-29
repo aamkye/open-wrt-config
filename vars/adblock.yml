@@ -1,5 +1,6 @@
 adblock:
   - __type: adblock
+    __root: adblock
     __name: global
     __fields:
       adb_enabled: 1

@@ -4,10 +4,26 @@
 
 - name: Setup dhcp.lan
   ansible.builtin.shell: |
-    uci add dhcp lan
-    uci set dhcp.lan="{{ dhcp.lan[0].__type }}"
-    uci set dhcp.lan.interface="{{ dhcp.lan[0].interface }}"
-    uci set dhcp.lan.start="{{ dhcp.lan[0].start }}"
-    uci set dhcp.lan.limit="{{ dhcp.lan[0].limit }}"
-    uci set dhcp.lan.leasetime="{{ dhcp.lan[0].leasetime }}"
-    uci set dhcp.lan.dhcpv4="{{ dhcp.lan[0].dhcpv4 }}"
+    {% set add_id = namespace(value="") %}
+    {% set added_id = namespace(value="") %}
+
+    {% if item.__name is defined %}
+      {% set add_id.value = item.__name %}
+      {% set added_id.value = item.__name %}
+    {% else %}
+      {% set add_id.value = item.__type %}
+      {% set added_id.value = "@" + item.__type + "[-1]" %}
+    {% endif %}
+
+    uci add {{ item.__root }} {{ add_id.value }}
+    uci set {{ item.__root }}.{{ added_id.value }}="{{ item.__type }}"
+    {% for key, value in item.__fields.items() %}
+      {% if value.__class__.__name__ == 'list' %}
+        {% for _item in value %}
+          uci add_list {{ item.__root }}.{{ added_id.value }}.{{ key }}="{{ _item }}"
+        {% endfor %}
+      {% else %}
+        uci set {{ item.__root }}.{{ added_id.value }}.{{ key }}={{ value }}
+      {% endif %}
+    {% endfor %}
+  loop: "{{ dhcp.lan }}"

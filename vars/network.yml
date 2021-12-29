@@ -1,6 +1,7 @@
 network:
   device:
     - __type: device
+      __root: network
       __fields:
         name: lan
         ipv6: 0
@@ -13,6 +14,7 @@ network:
           - lan4
 
     - __type: device
+      __root: network
       __fields:
         name: wan
         ipv6: 0
@@ -26,6 +28,7 @@ network:
 
   interface:
     - __type: interface
+      __root: network
       __name: lan
       __fields:
         device: lan
@@ -38,6 +41,7 @@ network:
           - 1.0.0.1
 
     - __type: interface
+      __root: network
       __name: wan
       __fields:
         device: wan
@@ -50,6 +54,7 @@ network:
           - 1.0.0.1
 
     - __type: interface
+      __root: network
       __name: vpn
       __fields:
         device: tun0

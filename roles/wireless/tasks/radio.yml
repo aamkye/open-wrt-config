@@ -1,22 +1,31 @@
-- name: Delete wireless
+- name: Delete old wireless.radio
+  ignore_errors: true
   ansible.builtin.shell: |
-    uci delete wireless.radio0
-    uci delete wireless.radio1
-    uci delete wireless.radio2
+    uci delete {{ item.__root }}.{{ item.__name }} | true
+  loop: "{{ wireless.radio }}"
 
-- name: Setup network.lan
+- name: Setup wireless.radio
   ansible.builtin.shell: |
-    uci add wireless radio0
-    uci set wireless.radio0="{{ wireless.radio[0].__type }}"
-    uci set wireless.radio0.path="{{ wireless.radio[0].path }}"
-    uci set wireless.radio0.disabled="{{ wireless.radio[0].disabled }}"
+    {% set add_id = namespace(value="") %}
+    {% set added_id = namespace(value="") %}
 
-    uci add wireless radio1
-    uci set wireless.radio1="{{ wireless.radio[1].__type }}"
-    uci set wireless.radio1.path="{{ wireless.radio[1].path }}"
-    uci set wireless.radio1.disabled="{{ wireless.radio[1].disabled }}"
+    {% if item.__name is defined %}
+      {% set add_id.value = item.__name %}
+      {% set added_id.value = item.__name %}
+    {% else %}
+      {% set add_id.value = item.__type %}
+      {% set added_id.value = "@" + item.__type + "[-1]" %}
+    {% endif %}
 
-    uci add wireless radio2
-    uci set wireless.radio2="{{ wireless.radio[2].__type }}"
-    uci set wireless.radio2.path="{{ wireless.radio[2].path }}"
-    uci set wireless.radio2.disabled="{{ wireless.radio[2].disabled }}"
+    uci add {{ item.__root }} {{ add_id.value }}
+    uci set {{ item.__root }}.{{ added_id.value }}="{{ item.__type }}"
+    {% for key, value in item.__fields.items() %}
+      {% if value.__class__.__name__ == 'list' %}
+        {% for _item in value %}
+          uci add_list {{ item.__root }}.{{ added_id.value }}.{{ key }}="{{ _item }}"
+        {% endfor %}
+      {% else %}
+        uci set {{ item.__root }}.{{ added_id.value }}.{{ key }}={{ value }}
+      {% endif %}
+    {% endfor %}
+  loop: "{{ wireless.radio }}"

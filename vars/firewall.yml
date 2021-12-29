@@ -1,6 +1,7 @@
 firewall:
   defaults:
     - __type: defaults
+      __root: firewall
       __fields:
         forward: REJECT
         input: ACCEPT
@@ -9,6 +10,7 @@ firewall:
 
   zone:
     - __type: zone
+      __root: firewall
       __fields:
         name: lan
         network: lan
@@ -17,6 +19,7 @@ firewall:
         forward: ACCEPT
 
     - __type: zone
+      __root: firewall
       __fields:
         name: wan
         network: wan
@@ -27,6 +30,7 @@ firewall:
         mtu_fix: 1
 
     - __type: zone
+      __root: firewall
       __fields:
         name: vpn
         network: vpn
@@ -38,21 +42,25 @@ firewall:
 
   forwarding:
     - __type: forwarding
+      __root: firewall
       __fields:
         src: lan
         dest: wan
 
     - __type: forwarding
+      __root: firewall
       __fields:
         src: vpn
         dest: lan
 
     - __type: forwarding
+      __root: firewall
       __fields:
         src: vpn
         dest: wan
 
     - __type: forwarding
+      __root: firewall
       __fields:
         src: lan
         dest: vpn
@@ -61,6 +69,7 @@ firewall:
 
   redirect:
     - __type: redirect
+      __root: firewall
       __fields:
         target: DNAT
         name: SSH-over-WAN
@@ -71,6 +80,7 @@ firewall:
         dest_port: 22
 
     - __type: redirect
+      __root: firewall
       __fields:
         target: DNAT
         name: WEB-over-WAN

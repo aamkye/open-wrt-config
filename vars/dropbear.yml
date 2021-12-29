@@ -1,9 +1,11 @@
 dropbear:
   - __type: dropbear
-    port: 22
-    interface: lan
-    passwordauth: off
-    rootpasswordauth: off
+    __root: dropbear
+    __fields:
+      Port: 22
+      Interface: lan
+      PasswordAuth: off
+      RootPasswordAuth: off
 
 authorized_keys:
   - !vault |
