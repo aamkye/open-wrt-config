@@ -1,0 +1,20 @@
+- name: Delete old unbound records
+  ignore_errors: true
+  ansible.builtin.shell: |
+    uci delete unbound.{{ item.__name }} | true
+  loop: "{{ unbound }}"
+
+- name: Setup unbound.@unbound
+  ansible.builtin.shell: |
+    uci add unbound {{ item.__name }}
+    uci set unbound.{{ item.__name }}="{{ item.__type }}"
+    {% for key, value in item.__fields.items() %}
+      {% if value.__class__.__name__ == 'list' %}
+        {% for _item in value %}
+          uci add_list unbound.{{ item.__name }}.{{ key }}="{{ _item }}"
+        {% endfor %}
+      {% else %}
+        uci set unbound.{{ item.__name }}.{{ key }}={{ value }}
+      {% endif %}
+    {% endfor %}
+  loop: "{{ unbound }}"

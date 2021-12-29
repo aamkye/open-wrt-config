@@ -1,0 +1,11 @@
+unbound:
+  - __type: unbound
+    __name: ub_main
+    __fields:
+      enabled: 1
+      manual_conf: 1
+      root_age: 9
+      trigger_interface:
+        - wan
+        - vpn
+        - lan

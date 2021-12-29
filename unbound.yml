@@ -1,0 +1,7 @@
+- name: Setup unbound
+  hosts: "{{ target | default('router') }}"
+  vars_files:
+    - vars/main.yml
+    - vars/unbound.yml
+  roles:
+    - { role: unbound }

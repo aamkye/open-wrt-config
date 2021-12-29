@@ -1,6 +1,10 @@
 - name: Post setup
   hosts: "{{ target | default('router') }}"
+  vars_files:
+    - vars/adblock.yml
+    - vars/unbound.yml
   roles:
     - { role: prometheus_exporter }
     - { role: adblock }
+    - { role: unblound }
 

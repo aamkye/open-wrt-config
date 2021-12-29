@@ -1,0 +1,11 @@
+- name: Install packages
+  community.general.opkg:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - ca-bundle
+    - ca-certificates
+    - unbound-daemon
+    - unbound-control-setup
+    - luci-app-unbound

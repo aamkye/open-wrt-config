@@ -1,0 +1,5 @@
+- name: Commit unbound changes
+  ansible.builtin.shell: |
+    uci commit unbound
+
+    service unbound restart
