@@ -4,4 +4,4 @@
 
 - name: Restart dnsmasq
   ansible.builtin.shell: |
-    service dnsmasq restart
+    /etc/init.d/dnsmasq restart

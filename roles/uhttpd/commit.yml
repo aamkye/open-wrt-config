@@ -4,4 +4,4 @@
 
 - name: Restart uhttpd
   ansible.builtin.shell: |
-    service uhttpd restart
+    /etc/init.d/uhttpd restart
