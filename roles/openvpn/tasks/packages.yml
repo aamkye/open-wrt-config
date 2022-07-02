@@ -6,3 +6,5 @@
   loop:
     - openvpn-openssl
     - luci-app-openvpn
+  when:
+    - skip_install | default(false) == false

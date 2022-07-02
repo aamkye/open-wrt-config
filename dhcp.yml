@@ -1,5 +1,5 @@
 - name: Setup dhcp
-  hosts: "{{ target | default('router') }}"
+  hosts: "{{ target | default('router.lan') }}"
   vars_files:
     - vars/dhcp.yml
   roles:

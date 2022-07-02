@@ -4,8 +4,6 @@
     state: present
     update_cache: yes
   loop:
-    - adblock
-    - luci-app-adblock
-    - tcpdump-mini
+    - luci-app-uhttpd
   when:
     - skip_install | default(false) == false

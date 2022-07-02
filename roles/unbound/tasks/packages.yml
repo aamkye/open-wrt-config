@@ -9,3 +9,5 @@
     - unbound-daemon
     - unbound-control-setup
     - luci-app-unbound
+  when:
+    - skip_install | default(false) == false

@@ -1,4 +1,4 @@
 - name: Setup prometheus_exporter
-  hosts: "{{ target | default('router') }}"
+  hosts: "{{ target | default('router.lan') }}"
   roles:
     - { role: prometheus_exporter }

@@ -40,18 +40,27 @@ network:
           - 1.1.1.1
           - 1.0.0.1
 
+    # Home Poland
+    # - __type: interface
+    #   __root: network
+    #   __name: wan
+    #   __fields:
+    #     device: wan
+    #     proto: static
+    #     ipaddr: 192.168.101.41
+    #     netmask: 255.255.255.248
+    #     gateway: 192.168.101.46
+    #     dns:
+    #       - 1.1.1.1
+    #       - 1.0.0.1
+
+    # Home Spain
     - __type: interface
       __root: network
       __name: wan
       __fields:
         device: wan
-        proto: static
-        ipaddr: 192.168.101.41
-        netmask: 255.255.255.248
-        gateway: 192.168.101.46
-        dns:
-          - 1.1.1.1
-          - 1.0.0.1
+        proto: dhcp
 
     - __type: interface
       __root: network

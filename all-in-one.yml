@@ -1,5 +1,5 @@
 - name: Setup all
-  hosts: "{{ target | default('router') }}"
+  hosts: "{{ target | default('router.lan') }}"
   vars_files:
     - vars/wireless.yml
     - vars/network.yml
