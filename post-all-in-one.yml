@@ -1,5 +1,5 @@
 - name: Post setup
-  hosts: "{{ target | default('router.lan') }}"
+  hosts: "{{ target | default('router') }}"
   vars_files:
     - vars/adblock.yml
     - vars/unbound.yml

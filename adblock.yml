@@ -1,5 +1,5 @@
 - name: Setup adblock
-  hosts: "{{ target | default('router.lan') }}"
+  hosts: "{{ target | default('router') }}"
   vars_files:
     - vars/adblock.yml
   roles:

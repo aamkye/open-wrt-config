@@ -1,5 +1,5 @@
 - name: Setup network
-  hosts: "{{ target | default('router.lan') }}"
+  hosts: "{{ target | default('router') }}"
   vars_files:
     - vars/network.yml
   roles:

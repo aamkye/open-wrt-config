@@ -1,0 +1,47 @@
+- name: Delete old acme
+  ignore_errors: true
+  ansible.builtin.shell: |
+    {% set add_id = namespace(value="") %}
+    {% set added_id = namespace(value="") %}
+
+    {% if item.__name is defined %}
+      {% set add_id.value = item.__name %}
+      {% set added_id.value = item.__name %}
+    {% else %}
+      {% set add_id.value = item.__type %}
+      {% set added_id.value = "@" + item.__type + "[-1]" %}
+    {% endif %}
+
+    uci delete {{ item.__root }}.{{ added_id.value }}
+  loop: "{{ acme }}"
+
+- name: Setup acme
+  ansible.builtin.shell: |
+    {% set add_id = namespace(value="") %}
+    {% set added_id = namespace(value="") %}
+
+    {% if item.__name is defined %}
+      {% set add_id.value = item.__name %}
+      {% set added_id.value = item.__name %}
+    {% else %}
+      {% set add_id.value = item.__type %}
+      {% set added_id.value = "@" + item.__type + "[-1]" %}
+    {% endif %}
+
+    uci add {{ item.__root }} {{ add_id.value }}
+    uci set {{ item.__root }}.{{ added_id.value }}="{{ item.__type }}"
+    {% for key, value in item.__fields.items() %}
+      {% if value.__class__.__name__ == 'list' %}
+        {% for _item in value %}
+          uci add_list {{ item.__root }}.{{ added_id.value }}.{{ key }}="{{ _item }}"
+        {% endfor %}
+      {% else %}
+        uci set {{ item.__root }}.{{ added_id.value }}.{{ key }}={{ value }}
+      {% endif %}
+    {% endfor %}
+  loop: "{{ acme }}"
+
+- name: Setup uHttpd for Acme
+  ansible.builtin.shell: |
+    uci set uhttpd.main.cert='{{ acme[0].__fields.state_dir }}/{{ acme[1].__fields.domains | regex_replace('\"', '') }}_ecc/{{ acme[1].__fields.domains | regex_replace('\"', '') }}.cer'
+    uci set uhttpd.main.key='{{ acme[0].__fields.state_dir }}/{{ acme[1].__fields.domains | regex_replace('\"', '') }}_ecc/{{ acme[1].__fields.domains | regex_replace('\"', '') }}.key'

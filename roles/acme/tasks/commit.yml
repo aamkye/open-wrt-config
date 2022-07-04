@@ -1,0 +1,9 @@
+- name: Commit acme changes
+  ansible.builtin.shell: |
+    uci commit acme
+    uci commit uhttpd
+
+- name: Restart acme
+  ansible.builtin.shell: |
+    /etc/init.d/acme restart
+    /etc/init.d/uhttpd restart

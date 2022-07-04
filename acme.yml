@@ -1,6 +1,6 @@
-- name: Setup dhcp
+- name: Setup acme
   hosts: "{{ target | default('router') }}"
   vars_files:
-    - vars/dhcp.yml
+    - vars/acme.yml
   roles:
-    - { role: dhcp }
+    - { role: acme }

@@ -1,0 +1,22 @@
+- name: Remove packages
+  community.general.opkg:
+    name: "{{ item }}"
+    state: absent
+    update_cache: yes
+  loop:
+    - libustream-wolfssl20201210
+  when:
+    - skip_install | default(false) == false
+
+- name: Install packages
+  community.general.opkg:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - luci-ssl-openssl
+    - acme
+    - luci-app-acme
+    - acme-dnsapi
+  when:
+    - skip_install | default(false) == false
