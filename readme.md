@@ -9,7 +9,7 @@
 ## Commands
 
 ```bash
-opkg upgrade $(opkg list-upgradable | awk '{ print $1 }')
+opkg update && opkg upgrade $(opkg list-upgradable | awk '{ print $1 }')
 
 uci show dropbear; ls -l /etc/dropbear; cat /etc/dropbear/authorized_keys
 
@@ -31,11 +31,13 @@ while uci -q delete dhcp.@dnsmasq[0]; do :; done
 ```yaml
 <type>:
   - __type: <type>
+    __root: <root_name>
     __name: <name>
     __fields:
       field1: 1
       field2: 0
   - __type: <type>
+    __root: <root_name>
     __name: <name>
     __fields:
       field1: 2
@@ -47,10 +49,12 @@ while uci -q delete dhcp.@dnsmasq[0]; do :; done
 ```yaml
 <type>:
   - __type: <type>
+    __root: <root_name>
     __fields:
       field1: 1
       field2: 0
   - __type: <type>
+    __root: <root_name>
     __fields:
       field1: 2
       field2: 5
