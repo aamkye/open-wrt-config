@@ -1,0 +1,4 @@
+- name: Setup bash
+  hosts: "{{ target | default('router') }}"
+  roles:
+    - { role: bash }

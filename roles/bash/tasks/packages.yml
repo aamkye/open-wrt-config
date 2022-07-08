@@ -1,0 +1,10 @@
+- name: Install packages
+  community.general.opkg:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - bash
+    - shadow-chsh
+  when:
+    - skip_install | default(false) == false

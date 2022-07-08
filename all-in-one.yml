@@ -1,16 +1,28 @@
 - name: Setup all
   hosts: "{{ target | default('router') }}"
   vars_files:
-    - vars/wireless.yml
-    - vars/network.yml
+    - vars/acme.yml
+    - vars/adblock.yml
     - vars/dhcp.yml
     - vars/dropbear.yml
     - vars/firewall.yml
+    - vars/main.yml
+    - vars/network.yml
+    - vars/openvpn.yml
+    - vars/unbound.yml
+    - vars/wireless.yml
   roles:
+    - { role: bash }
     - { role: wireless }
     - { role: network }
     - { role: dhcp }
     - { role: dropbear }
     - { role: firewall }
     - { role: uhttpd }
+
+    - { role: openvpn }
+    - { role: unbound }
+    - { role: adblock }
+    - { role: acme }
+    - { role: prometheus_exporter }
     - { role: reboot }
