@@ -1,0 +1,15 @@
+- name: Post setup
+  hosts: "{{ target | default('router') }}"
+  vars_files:
+    - vars/acme.yml
+    - vars/adblock.yml
+    - vars/main.yml
+    - vars/openvpn.yml
+    - vars/unbound.yml
+  roles:
+    - { role: openvpn }
+    - { role: unbound }
+    - { role: adblock }
+    - { role: acme }
+    - { role: prometheus_exporter }
+
