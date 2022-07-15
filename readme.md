@@ -59,3 +59,9 @@ while uci -q delete dhcp.@dnsmasq[0]; do :; done
       field1: 2
       field2: 5
 ```
+
+```bash
+luci-app-advanced-reboot
+luci-app-diag-core
+luci-app-statistics
+```
