@@ -130,6 +130,12 @@ dhcp:
     - __type: domain
       __root: dhcp
       __fields:
+        name: longhorn
+        ip: 10.255.0.2
+
+    - __type: domain
+      __root: dhcp
+      __fields:
         name: rig
         ip: 10.255.0.3
 
